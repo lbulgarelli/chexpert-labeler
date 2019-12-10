@@ -4,42 +4,43 @@ CheXpert NLP tool to extract observations from radiology reports.
 Read more about our project [here](https://stanfordmlgroup.github.io/competitions/chexpert/) and our AAAI 2019 paper [here](https://arxiv.org/abs/1901.07031).
 
 ## Prerequisites
-1. Clone the [NegBio repository](https://github.com/ncbi-nlp/NegBio):
-
-```Shell
-git clone https://github.com/ncbi-nlp/NegBio.git
-```
-
-2. Add the NegBio directory to your `PYTHONPATH`:
-
-```Shell
-export PYTHONPATH={path to negbio directory}:$PYTHONPATH
-```
-
-3. Create and activate the virtual environment:
+1. Create and activate the virtual environment:
     
-    `conda env create -f environment.yml`  
-    `conda activate chexpert-label`
+    ```Shell
+    conda env create -f environment.yml
+    conda activate chexpert-label
+    ```
 
-```Shell
-conda env create -f environment.yml
-```
+2. Clone the [NegBio repository](https://github.com/ncbi-nlp/NegBio):
 
-4. Activate the virtual environment:
+    ```Shell
+    git clone https://github.com/ncbi-nlp/NegBio.git
+    ```
 
-5. Install bllip-parser:
+3. Install NegBio requirements
 
-    `git clone git@github.com:BLLIP/bllip-parser`  
-    `export CC=clang`  
-    `export CXX=clang++`  
-    `pip install {path to bllip-parser directory}`
+    ```Shell
+    pip install -r {path to negbio directory}/requirements.txt
+    ```
+
+4. Add the NegBio directory to your `PYTHONPATH`:
+    
+    ```Shell
+    export PYTHONPATH={path to negbio directory}:$PYTHONPATH
+    ```
+
+5. Install NLTK data:
+    
+    ```Shell
+    python -m nltk.downloader universal_tagset punkt wordnet
+    ```
 
 6. Download the `GENIA+PubMed` parsing model:
 
-```python
-from bllipparser import RerankingParser
-RerankingParser.fetch_and_load('GENIA+PubMed')
-```
+    ```python
+    from bllipparser import RerankingParser
+    RerankingParser.fetch_and_load('GENIA+PubMed')
+    ```
 
 ## Usage
 Place reports in a headerless, single column csv `{reports_path}`. Each report must be contained in quotes if (1) it contains a comma or (2) it spans multiple lines. See [sample_reports.csv](https://raw.githubusercontent.com/stanfordmlgroup/chexpert-labeler/master/sample_reports.csv) (with output [labeled_reports.csv](https://raw.githubusercontent.com/stanfordmlgroup/chexpert-labeler/master/labeled_reports.csv))for an example.
