@@ -16,7 +16,10 @@ git clone https://github.com/ncbi-nlp/NegBio.git
 export PYTHONPATH={path to negbio directory}:$PYTHONPATH
 ```
 
-3. Make the virtual environment:
+3. Create and activate the virtual environment:
+    
+    `conda env create -f environment.yml`  
+    `conda activate chexpert-label`
 
 ```Shell
 conda env create -f environment.yml
@@ -24,21 +27,18 @@ conda env create -f environment.yml
 
 4. Activate the virtual environment:
 
-```Shell
-conda activate chexpert-label
-```
+5. Install bllip-parser:
 
-5. Install NLTK data:
-
-```Shell
-python -m nltk.downloader universal_tagset punkt wordnet
-```
+    `git clone git@github.com:BLLIP/bllip-parser`  
+    `export CC=clang`  
+    `export CXX=clang++`  
+    `pip install {path to bllip-parser directory}`
 
 6. Download the `GENIA+PubMed` parsing model:
 
 ```python
->>> from bllipparser import RerankingParser
->>> RerankingParser.fetch_and_load('GENIA+PubMed')
+from bllipparser import RerankingParser
+RerankingParser.fetch_and_load('GENIA+PubMed')
 ```
 
 ## Usage
